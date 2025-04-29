@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -14,13 +15,13 @@ body {
     margin: 0;
 }
 
-.login-container {
+.register-container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.login-box {
+.register-box {
     background-color: white;
     padding: 40px;
     border-radius: 10px;
@@ -70,23 +71,38 @@ h2 {
     background-color: #2980b9;
 }
 
-/* ---- NUEVO: estilos para los links de "Registrarse" y "Olvidó su contraseña" ---- */
 .links {
     margin-top: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #555;
-    text-decoration: none;
 }
 
-.register-link, .forgot-password {
+.links a {
     color: #3498db;
     text-decoration: none;
-    margin: 0 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-
-
-.register-link:hover, .forgot-password:hover {
+.links a:hover {
     text-decoration: underline;
+
+}
+
+@media (max-width: 500px) {
+    .register-box {
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .textbox input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .submit-button input {
+        padding: 12px;
+    }
 }
