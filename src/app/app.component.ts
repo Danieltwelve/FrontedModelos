@@ -1,19 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importa el servicio Router
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router'; // Importa RouterModule
 
 @Component({
   selector: 'app-root',
+  template: '<router-outlet></router-outlet>', // Corrige el template
   standalone: true,
-  imports: [RouterOutlet],
-  template: `<router-outlet></router-outlet>`
+  imports: [RouterModule] // Agrega RouterModule aquí
 })
-export class AppComponent {
-  title = 'login_detect';
-
-  constructor(private router: Router) {} // Inyecta el servicio Router
-
-  navigateToRegister() {
-    this.router.navigate(['/register']); // Navega a la ruta de registro
-  }
-}
+export class AppComponent {}
