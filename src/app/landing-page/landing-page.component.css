@@ -14,7 +14,7 @@ body {
 
 /* Header */
 .landing-header {
-  background-color: #FFD100;
+  background-color: #767676;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +35,6 @@ body {
   width: 36px;
   height: auto;
   margin-right: 12px;
-  filter: drop-shadow(0 0 3px rgba(255, 209, 0, 0.5));
 }
 
 .nav-buttons {
@@ -66,12 +65,12 @@ body {
 
 .btn.register {
   color: #000000;
-  background-color: #FFFFFF;
+  background-color: #FFD100;
 }
 
 .btn.login {
   color: #000000;
-  background-color: #FFF5D6;
+  background-color: #fafafa;
 }
 
 /* Main Content */

@@ -1,17 +1,34 @@
 <div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2 class="sidebar-title">Detect Panel</h2>
-      <nav class="sidebar-nav">
-        <button class="nav-item" routerLink="/dashboard/overview">Resumen</button>
-        <button class="nav-item" routerLink="/dashboard/cameras">Cámaras</button>
-        <button class="nav-item" routerLink="/dashboard/events">Eventos</button>
-        <button class="nav-item" routerLink="/dashboard/settings">Configuración</button>
-      </nav>
-    </aside>
-  
-    <!-- Contenido principal -->
-    <main class="dashboard-main">
+  <header class="dashboard-header">
+    <div class="header-logo">
+      <img src="/src/assets/detect_logo.png" alt="Logotipo de Detect Panel" class="logo-image" />
+      <span class="logo-text">Detect</span>
+    </div>
+    <div class="header-actions">
+      <div class="search-box">
+        <input type="search" placeholder="Buscar..." class="search-input" />
+        <button class="search-btn" aria-label="Buscar">
+        </button>
+      </div>
+      <div class="user-menu">
+        <span class="notification-badge">3</span>
+        <div class="user-avatar">
+          <img src="" alt="Avatar del usuario" class="avatar-image" />
+        </div>
+        <span class="user-name">Admin</span>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <button class="nav-item" routerLink="/dashboard/overview">Resumen</button>
+      <button class="nav-item" routerLink="/dashboard/cameras">Cámaras</button>
+      <button class="nav-item" routerLink="/dashboard/events">Eventos</button>
+      <button class="nav-item" routerLink="/dashboard/settings">Configuración</button>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
     </main>
-  </div>
-  
+</div>
