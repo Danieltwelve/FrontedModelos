@@ -1,88 +1,60 @@
 .register-container {
-  width: 100%;
-  padding: 20px;
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.register-box {
-  background: rgba(255, 255, 255, 0.95);
+.form-section, .info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  max-width: 400px; 
-  width: 90%;
-  margin: 0 auto;
-  transition: transform 0.3s ease;
 }
 
-.register-box:hover {
-  transform: translateY(-5px); 
+.form-section {
+  background: #fff;
 }
 
-
-.textbox {
-  margin-bottom: 25px;
-  position: relative;
-}
-
-.textbox input {
-  width: 100%;
-  padding: 12px 12px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-.textbox input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-}
-
-
-.submit-button input {
-  width: 100%;
-  padding: 14px;
-  background: #667eea; 
+.info-section {
+  background: linear-gradient(to right, #0077b6, #062236);
   color: white;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+input {
+  margin: 10px 0;
+  padding: 12px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 30px;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  background-color: #0077b6;
+  color: white;
+  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.submit-button input:hover {
-  background: #5a67d8; 
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-}
-
-
-.links {
-  margin-top: 25px;
-  text-align: center;
-}
-
-.links a {
-  color: #718096;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
-
-.links a:hover {
-  color: #667eea;
-}
-
-
-@media (max-width: 480px) {
-  .register-box {
-    padding: 30px 10px;
-  }
+  font-weight: bold;
+  transition: 0.3s;
   
-  .textbox input {
-    padding: 10px 15, 20px;
-  }
-} 
+}
+
+button:hover {
+  background-color: #023e8a;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  font-size: 20px;
+  color: #0077b6;
+}
+
+.social-icons a:hover {
+  color: #023e8a;
+}
