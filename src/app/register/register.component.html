@@ -1,23 +1,20 @@
 <div class="register-container">
-    <div class="register-box">
-      <h2>Registrarse</h2>
-      <form>
-        <div class="textbox">
-          <input type="text" placeholder="Nombre de usuario" required>
-        </div>
-        <div class="textbox">
-          <input type="email" placeholder="Correo electrónico" required>
-        </div>
-        <div class="textbox">
-          <input type="password" placeholder="Contraseña" required>
-        </div>
-        <div class="submit-button">
-          <input type="submit" value="Registrarse">
-        </div>
-      </form>
-      <div class="links">
-        <a routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
-      </div>
+  <div class="form-section">
+    <h2>Crear una cuenta</h2>
+    <div class="social-icons">
+      
     </div>
+    
+    <form>
+      <input type="text" placeholder="Nombre" required />
+      <input type="email" placeholder="Correo" required />
+      <input type="password" placeholder="Contraseña" required />
+      <button type="submit">REGISTRATE  </button>
+    </form>
   </div>
-  
+  <div class="info-section">
+    <h2>Bienvenido!</h2>
+    <p>Si ya tienes una cuenta,inicia sesion.</p>
+    <a routerLink="/login"><button>Iniciar sesion</button></a>
+  </div>
+</div>
