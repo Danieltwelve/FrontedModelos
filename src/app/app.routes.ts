@@ -7,9 +7,10 @@ import { PruebaComponent } from './prueba/prueba.component';
 import { authGuard } from './auth.guard'; // Importa el guardia
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'landing-page', component: LandingPageComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]}, // Protege dashboard
   { path: 'prueba', component: PruebaComponent, canActivate: [authGuard] }, // Protege prueba
   { path: '**', redirectTo: '' }
