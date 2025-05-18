@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard.component';
 import { SlidebarComponent } from './components/slidebar/slidebar/slidebar.component';
 import { NavbarComponent } from './components/navbar/navbar/navbar.component';
+import { LivevideoComponent } from './components/livevideo/livevideo/livevideo.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -14,7 +15,8 @@ import { NavbarComponent } from './components/navbar/navbar/navbar.component';
     FormsModule,
     DashboardComponent,
     SlidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    LivevideoComponent
   ],
  // exports: [
    // DashboardComponent,

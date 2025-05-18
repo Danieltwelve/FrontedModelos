@@ -1,0 +1,31 @@
+.livevideo-container {
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  background: #f0f2f5;     /* Fondo claro para dar contraste */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.video-box {
+  width: 80%;
+  max-width: 900px;
+  height: 500px;
+  background-color: #444; /* Gris oscuro */
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 600;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.video-box:hover {
+  background-color: #555; /* Cambio leve al hacer hover */
+  cursor: pointer;
+}
