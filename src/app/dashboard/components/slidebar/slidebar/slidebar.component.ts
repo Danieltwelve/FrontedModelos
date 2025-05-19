@@ -10,7 +10,11 @@ export class SlidebarComponent {
   constructor(private router: Router) {}
 
  navigateTo(route: string): void {
-  this.router.navigate([route]);
+  if (route === 'landing-page') {
+    this.router.navigate(['/landing-page']);
+  } else {
+    this.router.navigate(['/dashboard', route]);
+  }
 }
   
 }
