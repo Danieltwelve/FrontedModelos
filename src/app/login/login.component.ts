@@ -23,12 +23,6 @@ export class LoginComponent {
   constructor(private router: Router, private http: HttpClient) {}
 
   onSubmit() {
-    if (this.username === 'victor' && this.password === '1234') {
-      this.router.navigate(['/prueba']);
-    } else {
-      this.errorMessage = 'Usuario o contraseña incorrectos';
-    }
-
 
     // Preparar los datos para la solicitud al token endpoint
     const body = new URLSearchParams();

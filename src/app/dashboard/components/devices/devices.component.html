@@ -1,0 +1,60 @@
+<div class="devices-container">
+    <h2>Registrar Dispositivo</h2>
+
+    <form (ngSubmit)="onSubmit()" #deviceForm="ngForm">
+
+        <!-- Nombre del dispositivo -->
+        <div class="form-group">
+            <label for="name">Nombre (elige cámara):</label>
+            <select id="name" [(ngModel)]="device.name" name="name" required>
+                <option value="" disabled selected>Selecciona una cámara</option>
+                <option *ngFor="let camera of cameras" [value]="camera.label">{{ camera.label || camera.deviceId }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Tipo -->
+        <div class="form-group">
+            <label for="type">Tipo:</label>
+            <input type="text" id="type" name="type" [(ngModel)]="device.type" required maxlength="50" />
+        </div>
+
+        <!-- Ubicación -->
+        <div class="form-group">
+            <label for="location">Ubicación:</label>
+            <input type="text" id="location" name="location" [(ngModel)]="device.location" required maxlength="255" />
+        </div>
+
+        <!-- Estado -->
+        <div class="form-group">
+            <label for="status">Estado:</label>
+            <select id="status" name="status" [(ngModel)]="device.status" required>
+                <option value="" disabled selected>Seleccione un estado</option>
+                <option value="ACTIVE">Activo</option>
+                <option value="INACTIVE">Inactivo</option>
+            </select>
+        </div>
+
+        <button type="submit" [disabled]="deviceForm.invalid">Guardar Dispositivo</button>
+    </form>
+</div>
+<div class="devices-list">
+    <h2>Lista de Dispositivos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let device of devices">
+                <td>{{ device.name }}</td>
+                <td>{{ device.type }}</td>
+                <td>{{ device.location }}</td>
+                <td>{{ device.status }}</td>
+            </tr>
+        </tbody>
+    </table>

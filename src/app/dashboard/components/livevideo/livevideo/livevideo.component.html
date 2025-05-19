@@ -1,5 +1,12 @@
 <div class="livevideo-container">
+  <p>Video en vivo</p>
+  <h2>Stream de Video en Vivo</h2>
+
   <div class="video-box">
-    <p>Video en vivo</p>
+    <img #videoImage [src]="videoUrl" alt="Video en vivo" width="1080" height="720" />
+    
+    <button (click)="openFullscreen(videoImage)" class="fullscreen-btn">
+      Pantalla completa
+    </button>
   </div>
 </div>
