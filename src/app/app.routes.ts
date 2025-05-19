@@ -7,6 +7,7 @@ import { PruebaComponent } from './prueba/prueba.component';
 import { LivevideoComponent } from './dashboard/components/livevideo/livevideo/livevideo.component';// Asegúrate de importar
 import { HomeComponent } from './dashboard/components/home/home/home.component'; // Asegúrate de importar el componente HomeComponent
 import { authGuard } from './auth.guard';
+import { DevicesComponent } from './dashboard/components/devices/devices.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
@@ -14,14 +15,16 @@ export const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'landing-page', component: LandingPageComponent },
 
-  {path: 'dashboard',
+  {
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [authGuard],
     children: [
-    { path: 'home', component: HomeComponent },
-    
-    { path: 'livevideo', component: LivevideoComponent }]},
-  
+      { path: 'home', component: HomeComponent },
+      { path: 'livevideo', component: LivevideoComponent },
+      { path: 'devices', component: DevicesComponent },]
+  },
+
   { path: 'prueba', component: PruebaComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];

@@ -7,20 +7,19 @@ import { DashboardComponent } from './dashboard.component';
 import { SlidebarComponent } from './components/slidebar/slidebar/slidebar.component';
 import { NavbarComponent } from './components/navbar/navbar/navbar.component';
 import { LivevideoComponent } from './components/livevideo/livevideo/livevideo.component';
+import { DevicesComponent } from './components/devices/devices.component';
+
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+
     DashboardComponent,
     SlidebarComponent,
     NavbarComponent,
-    LivevideoComponent
-  ],
- // exports: [
-   // DashboardComponent,
-   // SlidebarComponent
-  //]
+    LivevideoComponent,
+    DevicesComponent
+  ]
 })
 export class DashboardModule { }

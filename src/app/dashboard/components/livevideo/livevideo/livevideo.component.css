@@ -29,3 +29,37 @@
   background-color: #555; /* Cambio leve al hacer hover */
   cursor: pointer;
 }
+
+.livevideo-container {
+  display: flex;
+  flex-direction: column; /* Fuerza que todo esté en columna (vertical) */
+  align-items: center;     /* Centra horizontalmente */
+  text-align: center;
+}
+
+.video-box {
+  margin-top: 20px; /* Separación entre el texto y el video */
+}
+
+img {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+.fullscreen-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+  background-color: #0056b3;
+}
