@@ -25,36 +25,7 @@
             <input type="text" id="location" name="location" [(ngModel)]="device.location" required maxlength="255" />
         </div>
 
-        <!-- Estado -->
-        <div class="form-group">
-            <label for="status">Estado:</label>
-            <select id="status" name="status" [(ngModel)]="device.status" required>
-                <option value="" disabled selected>Seleccione un estado</option>
-                <option value="ACTIVE">Activo</option>
-                <option value="INACTIVE">Inactivo</option>
-            </select>
-        </div>
 
         <button type="submit" [disabled]="deviceForm.invalid">Guardar Dispositivo</button>
     </form>
 </div>
-<div class="devices-list">
-    <h2>Lista de Dispositivos</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Ubicación</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let device of devices">
-                <td>{{ device.name }}</td>
-                <td>{{ device.type }}</td>
-                <td>{{ device.location }}</td>
-                <td>{{ device.status }}</td>
-            </tr>
-        </tbody>
-    </table>

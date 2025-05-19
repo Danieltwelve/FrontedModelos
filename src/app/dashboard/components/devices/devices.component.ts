@@ -1,8 +1,8 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; // <-- Importa HttpClient y HttpHeaders
 
 @Component({
   selector: 'app-devices',
@@ -31,6 +31,7 @@ export class DevicesComponent {
     if (isPlatformBrowser(this.platformId)) {
       this.getCameras();
     }
+    this.getDevices();
   }
 
   async getCameras() {
@@ -43,24 +44,42 @@ export class DevicesComponent {
     }
   }
 
+  getDevices() {
+    const token = localStorage.getItem('access_token');
+    if (!token) return;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    this.http.get<any[]>('http://localhost:8081/devices', { headers }).subscribe({
+      next: (data) => {
+        this.devices = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener dispositivos:', err);
+      }
+    });
+  }
+
   onSubmit() {
-    // 1. Obtener el token de Keycloak desde localStorage
     const token = localStorage.getItem('access_token');
     if (!token) {
       alert('No hay token de autenticación');
       return;
     }
 
-    // 2. Preparar los headers con el token
+    // Forzar estado INACTIVE
+    this.device.status = 'INACTIVE';
+
+    // Limpiar el nombre para que solo quede la parte base
+    this.device.name = this.device.name.replace(/\s*\([^)]+\)/, '');
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
 
-    // 3. Enviar el dispositivo al endpoint protegido
     this.http.post('http://localhost:8081/devices', this.device, { headers }).subscribe({
       next: (response) => {
-        // 4. Actualizar la lista local y limpiar el formulario
         this.devices.push({ ...this.device });
         this.device = { name: '', type: '', location: '', status: '' };
         alert('Dispositivo registrado correctamente');
@@ -70,5 +89,11 @@ export class DevicesComponent {
         alert('Error al registrar el dispositivo');
       }
     });
+  }
+
+  activarDispositivo(device: any) {
+    // Aquí puedes implementar la lógica para activar el dispositivo
+    alert(`Activar dispositivo: ${device.name}`);
+    // Por ejemplo, podrías hacer un POST o PUT a tu backend para cambiar el estado
   }
 }
