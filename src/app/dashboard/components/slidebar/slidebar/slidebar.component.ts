@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 export class SlidebarComponent {
   constructor(private router: Router) {}
 
-  navigateTo(path: string) {
-    this.router.navigate(['/dashboard', path]);
-  }
+ navigateTo(route: string): void {
+  this.router.navigate([route]);
+}
+  
 }
