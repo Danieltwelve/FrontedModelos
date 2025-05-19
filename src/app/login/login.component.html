@@ -1,24 +1,45 @@
-<div> 
- <div class="login-box">
+<div class="login-container">
+  <div class="left-side">
+    <h2>¡Hola, Bienvenido!</h2>
+    <p>¿No tienes una cuenta?</p>
+    <button routerLink="/register">Registrarse</button>
+  </div>
+
+  <!-- Lado derecho con el formulario de login -->
+  <div class="right-side">
     <h2>Iniciar Sesión</h2>
     <form (ngSubmit)="onSubmit()">
-      <div class="textbox">
-        <input type="text" placeholder="Usuario" [(ngModel)]="username" name="username" required>
+      <div class="input-group">
+        <input
+          type="text"
+          placeholder="Usuario"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+        <i class="fas fa-user icon"></i>
       </div>
-      <div class="textbox">
-        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" required>
+
+      <div class="input-group ">
+        <input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <i class="fas fa-lock icon"></i>
       </div>
-      <div class="submit-button">
-        <input type="submit" value="Iniciar sesión">
-      </div>
+
+      <a href="#" class="forgot-password">¿Olvidó su contraseña?</a>
+
+      <button type="submit" class="login-btn">Iniciar sesión</button>
+
       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
     </form>
-    <div class="links">
-      <a routerLink="/register" class="register-link">Registrarse</a> | 
-      <a href="#" class="forgot-password">¿Olvidó su contraseña?</a>
+
+    
     </div>
   </div>
-</div>
-
