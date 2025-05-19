@@ -8,10 +8,11 @@ import { LivevideoComponent } from './dashboard/components/livevideo/livevideo/l
 import { HomeComponent } from './dashboard/components/home/home/home.component'; // Asegúrate de importar el componente HomeComponent
 import { authGuard } from './auth.guard';
 import { DevicesComponent } from './dashboard/components/devices/devices.component';
+import { loginGuard } from './login.guard';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'landing-page', component: LandingPageComponent },
 
