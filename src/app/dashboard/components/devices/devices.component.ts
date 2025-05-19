@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // <-- Importa HttpClient y HttpHeaders
@@ -21,10 +22,15 @@ export class DevicesComponent {
   devices: any[] = [];
   cameras: MediaDeviceInfo[] = [];
 
-  constructor(private http: HttpClient) {} // <-- Inyecta HttpClient
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    this.getCameras();
+    if (isPlatformBrowser(this.platformId)) {
+      this.getCameras();
+    }
   }
 
   async getCameras() {

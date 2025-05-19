@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -7,16 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
-    this.initProfileDropdown();
-    this.initToggleSidebar();
-    this.handleClickOutside();
+    if (isPlatformBrowser(this.platformId)) {
+      this.initProfileDropdown();
+      this.initToggleSidebar();
+      this.handleClickOutside();
+    }
   }
 
   initProfileDropdown(): void {
-    const profile = document.querySelector('nav. profile');
+    const profile = document.querySelector('nav .profile');
     const imgProfile = profile?.querySelector('img');
     const dropdownProfile = profile?.querySelector('.profile-link');
 
