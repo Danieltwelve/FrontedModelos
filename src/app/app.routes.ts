@@ -9,6 +9,7 @@ import { HomeComponent } from './dashboard/components/home/home/home.component';
 import { authGuard } from './auth.guard';
 import { DevicesComponent } from './dashboard/components/devices/devices.component';
 import { loginGuard } from './login.guard';
+import { UsersComponent } from './dashboard/components/users/users/users.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
@@ -23,7 +24,9 @@ export const appRoutes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'livevideo', component: LivevideoComponent },
-      { path: 'devices', component: DevicesComponent },]
+      { path: 'devices', component: DevicesComponent },
+      { path: 'users', component: UsersComponent }, 
+    ]
   },
 
   { path: 'prueba', component: PruebaComponent, canActivate: [authGuard] },

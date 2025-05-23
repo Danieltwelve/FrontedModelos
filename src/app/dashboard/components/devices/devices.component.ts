@@ -45,6 +45,7 @@ export class DevicesComponent {
   }
 
   getDevices() {
+    if (!isPlatformBrowser(this.platformId)) return; // Solo en navegador
     const token = localStorage.getItem('access_token');
     if (!token) return;
     const headers = new HttpHeaders({
