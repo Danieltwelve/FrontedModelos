@@ -1,0 +1,62 @@
+<div class="examples-container">
+  <!-- Filtros -->
+  <div class="filters">
+    <button [class.active]="selectedCategory === 'all'" 
+            (click)="filterByType('all')">
+      Todos
+    </button>
+    <button [class.active]="selectedCategory === 'videos'" 
+            (click)="filterByType('videos')">
+      Videos
+    </button>
+    <button [class.active]="selectedCategory === 'images'" 
+            (click)="filterByType('images')">
+      Imágenes
+    </button>
+  </div>
+
+  <!-- Galería -->
+  <div class="media-grid">
+    <div *ngFor="let item of getFilteredItems()" class="media-card" (click)="abrirModalMedia(item)">
+      <!-- Thumbnail/Preview -->
+      <div class="media-preview">
+        <img *ngIf="item.type === 'image'" [src]="item.url" [alt]="item.title">
+        <img *ngIf="item.type === 'video'" [src]="item.thumbnail" [alt]="item.title">
+      </div>
+      <!-- Info -->
+      <div class="media-info">
+        <h3>{{item.title}}</h3>
+        <p>{{item.description}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para mostrar video o imagen en grande -->
+  <div class="modal" *ngIf="modalAbierto">
+    <div class="modal-content">
+      <button (click)="cerrarModal()" style="float:right;">Cerrar</button>
+      <ng-container *ngIf="mediaSeleccionada">
+        <ng-container [ngSwitch]="mediaSeleccionada.type">
+          <iframe
+            *ngSwitchCase="'video'"
+            width="560"
+            height="315"
+            [src]="getSafeUrl(mediaSeleccionada.url)"
+            frameborder="0"
+            allowfullscreen>
+          </iframe>
+          <img
+            *ngSwitchCase="'image'"
+            [src]="mediaSeleccionada.url"
+            [alt]="mediaSeleccionada.title"
+            style="max-width:100%;max-height:80vh;"
+          />
+        </ng-container>
+        <h3>{{mediaSeleccionada.title}}</h3>
+        <p>{{mediaSeleccionada.description}}</p>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+
