@@ -3,7 +3,7 @@
   position: fixed;
   max-width: 260px;
   width: 100%;
-  background: #fff;
+  background: #9c9c9c;
   top: 0;
   left: 0;
   height: 100%;
@@ -52,7 +52,7 @@
   top: 0;
   left: 0;
   z-index: 100;
-  background: #fff;
+  background: #062236;
   transition: all .3s ease;
   padding: 0 6px;
   width: 100%;

@@ -3,8 +3,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LivevideoComponent } from './dashboard/components/livevideo/livevideo/livevideo.component';// Asegúrate de importar
-import { HomeComponent } from './dashboard/components/home/home/home.component'; // Asegúrate de importar el componente HomeComponent
+import { LivevideoComponent } from './dashboard/components/livevideo/livevideo/livevideo.component';
+import { HomeComponent } from './dashboard/components/home/home/home.component'; 
 import { authGuard } from './auth.guard';
 import { DevicesComponent } from './dashboard/components/devices/devices.component';
 import { loginGuard } from './login.guard';
