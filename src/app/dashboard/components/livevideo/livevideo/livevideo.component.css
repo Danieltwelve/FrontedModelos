@@ -1,65 +1,121 @@
-.livevideo-container {
-  height: 100vh; /* Ocupa toda la altura de la ventana */
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center;     /* Centra verticalmente */
-  background: #f0f2f5;     /* Fondo claro para dar contraste */
-  padding: 20px;
-  box-sizing: border-box;
+/* Contenedor principal */
+.devices-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
 }
 
-.video-box {
-  width: 80%;
-  max-width: 900px;
-  height: 500px;
-  background-color: #444; /* Gris oscuro */
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+.title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Tabla */
+.table-container {
+  overflow-x: auto;
+}
+
+.devices-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.devices-table th,
+.devices-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.devices-table thead {
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+.action-cell {
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: white;
-  font-size: 1.8rem;
-  font-weight: 600;
-  user-select: none;
-  transition: background-color 0.3s ease;
 }
 
-.video-box:hover {
-  background-color: #555; /* Cambio leve al hacer hover */
+.status-label {
+  color: green;
+  font-weight: bold;
+}
+
+/* Botones */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.livevideo-container {
-  display: flex;
-  flex-direction: column; /* Fuerza que todo esté en columna (vertical) */
-  align-items: center;     /* Centra horizontalmente */
+.btn-activate {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-activate:hover {
+  background-color: #218838;
+}
+
+/* Video */
+.video-box {
+  margin: 2rem auto;
   text-align: center;
 }
 
-.video-box {
-  margin-top: 20px; /* Separación entre el texto y el video */
-}
-
-img {
-  border: 2px solid #ccc;
-  border-radius: 8px;
+.video-stream {
   max-width: 100%;
   height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Botón fullscreen */
 .fullscreen-btn {
-  margin-top: 10px;
-  padding: 8px 16px;
-  font-size: 14px;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  transition: transform 0.3s;
 }
 
 .fullscreen-btn:hover {
+  transform: scale(1.05);
   background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .devices-table th,
+  .devices-table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+}
+
+.my-swal-button {
+  background-color: #218838 !important;  /* morado */
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-weight: bold;
 }

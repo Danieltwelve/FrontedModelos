@@ -1,34 +1,37 @@
-<div class="devices-list">
-  <h2>Lista de Dispositivos</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Tipo</th>
-        <th>Ubicación</th>
-        <th>Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let device of devices">
-        <td>{{ device.name }}</td>
-        <td>{{ device.type }}</td>
-        <td>{{ device.location }}</td>
-        <td>
-          <button *ngIf="device.status === 'INACTIVE'" (click)="activarDispositivo(device)">
-            Activar
-          </button>
-          <span *ngIf="device.status !== 'INACTIVE'">Activa</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="devices-container">
+  <h2 class="title">📡 Lista de Dispositivos</h2>
+
+  <div class="table-container">
+    <table class="devices-table">
+      <thead>
+        <tr>
+          <th>🔧 Nombre</th>
+          <th>📂 Tipo</th>
+          <th>📍 Ubicación</th>
+          <th>⚙️ Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let device of devices">
+          <td>{{ device.name }}</td>
+          <td>{{ device.type }}</td>
+          <td>{{ device.location }}</td>
+          <td class="action-cell">
+            <button *ngIf="device.status === 'INACTIVE'" class="btn btn-activate" (click)="activarDispositivo(device)">
+              Activar
+            </button>
+            <span *ngIf="device.status !== 'INACTIVE'" class="status-label">Activa</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<!-- Mostrar el stream solo si showVideo es true -->
+<!-- Stream de video -->
 <div class="video-box" *ngIf="showVideo">
-  <img #videoImage [src]="videoUrl" alt="Video en vivo" width="1080" height="720" />
+  <img #videoImage [src]="videoUrl" alt="Video en vivo" class="video-stream" />
   <button (click)="openFullscreen(videoImage)" class="fullscreen-btn">
-    Pantalla completa
+    ⛶ Pantalla completa
   </button>
 </div>
