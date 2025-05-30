@@ -1,27 +1,21 @@
-<!-- stats-cards.component.html -->
-<div class="stats-container">
+<div *ngIf="isBrowser" class="stats-container">
+  <!-- Barras -->
   <div class="card">
-    <h3>🔔 Alertas activas</h3>
-    <p><strong>24</strong> alertas</p>
-    <div class="tags">
-      <span class="tag low">Bajas: 10</span>
-      <span class="tag medium">Medias: 8</span>
-      <span class="tag high">Altas: 6</span>
-    </div>
+    <canvas #barChart></canvas>
   </div>
 
+  <!-- Pastel -->
   <div class="card">
-    <h3>🧍‍♂️ Usuarios conectados</h3>
-    <p><strong>7</strong> en las últimas 24h</p>
+    <canvas #pieChart></canvas>
   </div>
 
+  <!-- Línea -->
   <div class="card">
-    <h3>📦 Equipos activos</h3>
-    <p><strong>15</strong> equipos funcionando</p>
+    <canvas #lineChart></canvas>
   </div>
 
+  <!-- Radar -->
   <div class="card">
-    <h3>🕒 Última detección</h3>
-    <p><strong>18/05/2025 - 14:32</strong></p>
+    <canvas #radarChart></canvas>
   </div>
 </div>

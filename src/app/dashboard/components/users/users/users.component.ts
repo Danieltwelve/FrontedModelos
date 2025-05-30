@@ -124,17 +124,36 @@ export class UsersComponent implements OnInit {
       'Content-Type': 'application/json'
     });
 
-    this.http.post('http://localhost:8081/users', this.nuevoUsuario, { headers, responseType: 'text' }).subscribe({
-      next: () => {
-        this.cargarUsuarios(); // Recarga la lista real
-        this.nuevoUsuario = { username: '', firstName: '', lastName: '', email: '', password: '', roles: ['user'] };
-        this.mostrarFormularioAgregar = false;
-        alert('Usuario agregado correctamente');
-      },
-      error: (err) => {
-        alert('Error al agregar usuario');
-        console.error(err);
-      }
-    });
+    this.http.post<any>('http://localhost:8081/users', this.nuevoUsuario, { headers })
+      .subscribe({
+        next: (createdUser) => {
+          if (createdUser.id) {
+            // Solo si se creó correctamente y hay id
+            this.http.post(
+              `http://localhost:8081/users/${createdUser.id}/send-verify-email`,
+              {},
+              { headers, responseType: 'text' }
+            ).subscribe({
+              next: () => {
+                this.cargarUsuarios();
+                this.nuevoUsuario = { username: '', firstName: '', lastName: '', email: '', password: '', roles: ['user'] };
+                this.mostrarFormularioAgregar = false;
+                alert('Usuario agregado correctamente, se ha enviado un correo de verificación al usuario');
+              },
+              error: (err) => {
+                alert('Usuario agregado, pero error al enviar correo de verificación');
+                console.error(err);
+              }
+            });
+          } else {
+            // Si no hay id, muestra el mensaje de error del backend
+            alert(createdUser.message || 'No se pudo crear el usuario');
+          }
+        },
+        error: (err) => {
+          alert(err.error?.error || err.error || 'Error al agregar usuario');
+          console.error(err);
+        }
+      });
   }
 }

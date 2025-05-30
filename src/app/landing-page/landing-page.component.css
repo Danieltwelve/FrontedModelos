@@ -75,11 +75,6 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.btn.register {
-  color: #000000;
-  background-color: #ffffff;
-}
-
 .btn.login {
   color: #000000;
   background-color: #fafafa;
@@ -118,7 +113,7 @@ body {
   font-size: 1.2rem;
   max-width: 800px;
   margin-bottom: 3rem;
-  color: #767676;
+  color: #000000;
   line-height: 1.6;
 }
 
@@ -203,7 +198,7 @@ body {
 .slides {
   display: flex;
   width: 300%;
-  animation: slideAnimation 12s infinite;
+  animation: slideAnimation 20s infinite;
 }
 
 .slide {
