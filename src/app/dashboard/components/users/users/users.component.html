@@ -1,89 +1,100 @@
 <div class="users-list">
-    <h2>Lista de Usuarios</h2>
-    <button (click)="mostrarFormularioAgregar = !mostrarFormularioAgregar" style="margin-bottom: 1rem;">
-        {{ mostrarFormularioAgregar ? 'Cancelar' : 'Agregar Usuario' }}
-    </button>
+  <h2>Lista de Usuarios</h2>
 
-    <!-- Formulario para agregar usuario -->
-    <div *ngIf="mostrarFormularioAgregar" class="modal">
-        <h3>Agregar Usuario</h3>
-        <form (ngSubmit)="agregarUsuario()">
-            <label>
-                Usuario:
-                <input [(ngModel)]="nuevoUsuario.username" name="username" required />
-            </label>
-            <label>
-                Nombre:
-                <input [(ngModel)]="nuevoUsuario.firstName" name="firstName" required />
-            </label>
-            <label>
-                Apellido:
-                <input [(ngModel)]="nuevoUsuario.lastName" name="lastName" required />
-            </label>
-            <label>
-                Email:
-                <input [(ngModel)]="nuevoUsuario.email" name="email" required />
-            </label>
-            <label>
-                Contraseña:
-                <input [(ngModel)]="nuevoUsuario.password" name="password" type="password" required />
-            </label>
-            <button type="submit">Guardar</button>
-        </form>
-    </div>
+  <button class="btn btn-toggle" (click)="mostrarFormularioAgregar = !mostrarFormularioAgregar">
+    {{ mostrarFormularioAgregar ? 'Cancelar' : 'Agregar Usuario' }}
+  </button>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Email verificado</th>
-                <th>Fecha de creación</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <td>{{ user.username }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.emailVerified ? 'Sí' : 'No' }}</td>
-                <td>
-                    {{ user.createdTimestamp ? (user.createdTimestamp | date:'dd/MM/yyyy HH:mm':'UTC') : '-' }}
-                </td>
-                <td>
-                    <button (click)="modificarUsuario(user)">Modificar</button>
-                    <button (click)="eliminarUsuario(user)">Eliminar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <!-- Formulario para agregar usuario -->
+  <div *ngIf="mostrarFormularioAgregar" class="modal">
+    <h3>Agregar Usuario</h3>
+    <form (ngSubmit)="agregarUsuario()">
+      <label>
+        Usuario:
+        <input [(ngModel)]="nuevoUsuario.username" name="username" required />
+      </label>
+      <label>
+        Nombre:
+        <input [(ngModel)]="nuevoUsuario.firstName" name="firstName" required />
+      </label>
+      <label>
+        Apellido:
+        <input [(ngModel)]="nuevoUsuario.lastName" name="lastName" required />
+      </label>
+      <label>
+        Email:
+        <input [(ngModel)]="nuevoUsuario.email" name="email" required />
+      </label>
+      <label>
+        Contraseña:
+        <input [(ngModel)]="nuevoUsuario.password" name="password" type="password" required />
+      </label>
+      <button type="submit" class="btn btn-save">
+        <i class="fas fa-save"></i> Guardar
+      </button>
+    </form>
+  </div>
 
-    <!-- Formulario de edición de usuario -->
-    <div *ngIf="selectedUser" class="modal">
-        <h3>Modificar Usuario</h3>
-        <form (ngSubmit)="guardarCambiosUsuario()">
-            <label>
-                Nombre:
-                <input [(ngModel)]="editUser.firstName" name="firstName" required />
-            </label>
-            <label>
-                Apellido:
-                <input [(ngModel)]="editUser.lastName" name="lastName" required />
-            </label>
-            <label>
-                Email:
-                <input [(ngModel)]="editUser.email" name="email" required />
-            </label>
-            <label>
-                Contraseña:
-                <input [(ngModel)]="editUser.password" name="password" required />
-            </label>
-            <button type="submit">Guardar</button>
-            <button type="button" (click)="cancelarEdicion()">Cancelar</button>
-        </form>
-    </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Email verificado</th>
+        <th>Fecha de creación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.username }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.emailVerified ? 'Sí' : 'No' }}</td>
+        <td>
+          {{ user.createdTimestamp ? (user.createdTimestamp | date:'dd/MM/yyyy HH:mm':'UTC') : '-' }}
+        </td>
+        <td>
+          <button class="btn btn-edit" (click)="modificarUsuario(user)">
+            <i class="fas fa-edit"></i> Modificar
+          </button>
+          <button class="btn btn-delete" (click)="eliminarUsuario(user)">
+            <i class="fas fa-trash-alt"></i> Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Formulario de edición de usuario -->
+  <div *ngIf="selectedUser" class="modal">
+    <h3>Modificar Usuario</h3>
+    <form (ngSubmit)="guardarCambiosUsuario()">
+      <label>
+        Nombre:
+        <input [(ngModel)]="editUser.firstName" name="firstName" required />
+      </label>
+      <label>
+        Apellido:
+        <input [(ngModel)]="editUser.lastName" name="lastName" required />
+      </label>
+      <label>
+        Email:
+        <input [(ngModel)]="editUser.email" name="email" required />
+      </label>
+      <label>
+        Contraseña:
+        <input [(ngModel)]="editUser.password" name="password" required />
+      </label>
+      <button type="submit" class="btn btn-save">
+        <i class="fas fa-save"></i> Guardar
+      </button>
+      <button type="button" class="btn btn-cancel" (click)="cancelarEdicion()">
+        <i class="fas fa-times-circle"></i> Cancelar
+      </button>
+    </form>
+  </div>
 </div>
