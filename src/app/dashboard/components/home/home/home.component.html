@@ -1,37 +1,21 @@
 <div *ngIf="isBrowser" class="stats-container">
   <!-- Barras -->
   <div class="card">
-    <canvas baseChart
-      [data]="barChartData"
-      [options]="barChartOptions"
-      type="bar">
-    </canvas>
+    <canvas #barChart></canvas>
   </div>
 
   <!-- Pastel -->
   <div class="card">
-    <canvas baseChart
-      [data]="pieChartData"
-      [options]="pieChartOptions"
-      type="pie">
-    </canvas>
+    <canvas #pieChart></canvas>
   </div>
 
   <!-- Línea -->
   <div class="card">
-    <canvas baseChart
-      [data]="lineChartData"
-      [options]="lineChartOptions"
-      type="line">
-    </canvas>
+    <canvas #lineChart></canvas>
   </div>
 
   <!-- Radar -->
   <div class="card">
-    <canvas baseChart
-      [data]="radarChartData"
-      [options]="radarChartOptions"
-      type="radar">
-    </canvas>
+    <canvas #radarChart></canvas>
   </div>
 </div>

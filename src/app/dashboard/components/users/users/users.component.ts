@@ -138,7 +138,7 @@ export class UsersComponent implements OnInit {
                 this.cargarUsuarios();
                 this.nuevoUsuario = { username: '', firstName: '', lastName: '', email: '', password: '', roles: ['user'] };
                 this.mostrarFormularioAgregar = false;
-                alert('Usuario agregado correctamente y correo de verificación enviado');
+                alert('Usuario agregado correctamente, se ha enviado un correo de verificación al usuario');
               },
               error: (err) => {
                 alert('Usuario agregado, pero error al enviar correo de verificación');
