@@ -32,9 +32,9 @@
   </div>
 
   <!-- Modal para mostrar video o imagen en grande -->
-  <div class="modal" *ngIf="modalAbierto">
-    <div class="modal-content">
-      <button (click)="cerrarModal()" style="float:right;">Cerrar</button>
+  <div class="modal" *ngIf="modalAbierto" (click)="cerrarModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button (click)="cerrarModal()" title="Cerrar">&times;</button>
       <ng-container *ngIf="mediaSeleccionada">
         <ng-container [ngSwitch]="mediaSeleccionada.type">
           <iframe

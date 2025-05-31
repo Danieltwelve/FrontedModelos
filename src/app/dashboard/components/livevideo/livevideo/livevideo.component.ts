@@ -57,6 +57,7 @@ export class LivevideoComponent {
     const body = { nombre_camara: device.name };
     this.http.post('http://localhost:5001/start', body).subscribe({
       next: (response) => {
+        device.status = 'ACTIVE'; 
         Swal.fire({
           icon: 'success',
           title: `Cámara "${device.name}" activada correctamente`,
@@ -74,8 +75,32 @@ export class LivevideoComponent {
           text: 'Por favor verifica que el dispositivo esté disponible o conectado.',
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#218838'
-        
+        });
+        console.error(error);
+      }
+    });
+  }
 
+  desactivarDispositivo(device: any) {
+    const body = { nombre_camara: device.name };
+    this.http.post('http://localhost:5001/stop', body).subscribe({
+      next: (response) => {
+        device.status = 'INACTIVE';
+        this.showVideo = false;
+        Swal.fire({
+          icon: 'success',
+          title: `Cámara "${device.name}" desactivada correctamente`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al desactivar la cámara',
+          text: 'No se pudo detener el streaming.',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#e53935'
         });
         console.error(error);
       }

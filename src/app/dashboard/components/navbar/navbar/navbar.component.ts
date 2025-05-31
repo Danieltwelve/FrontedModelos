@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,10 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -26,6 +31,21 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  
-
+  logout(): void {
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Estás seguro de cerrar sesión?',
+      text: 'Se cerrará tu sesión actual.',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, salir',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#e53935',
+      cancelButtonColor: '#bdbdbd'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('access_token');
+        this.router.navigate(['/landing-page']);
+      }
+    });
+  }
 }

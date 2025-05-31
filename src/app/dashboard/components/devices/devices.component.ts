@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-devices',
@@ -64,7 +65,12 @@ export class DevicesComponent {
   onSubmit() {
     const token = localStorage.getItem('access_token');
     if (!token) {
-      alert('No hay token de autenticación');
+      Swal.fire({
+        icon: 'error',
+        title: 'No hay token de autenticación',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#e53935'
+      });
       return;
     }
 
@@ -83,18 +89,31 @@ export class DevicesComponent {
       next: (response) => {
         this.devices.push({ ...this.device });
         this.device = { name: '', type: '', location: '', status: '' };
-        alert('Dispositivo registrado correctamente');
+        Swal.fire({
+          icon: 'success',
+          title: 'Dispositivo registrado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error: (error) => {
         console.error('Error al registrar el dispositivo:', error);
-        alert('Error al registrar el dispositivo');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar el dispositivo',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#e53935'
+        });
       }
     });
   }
 
   activarDispositivo(device: any) {
-    // Aquí puedes implementar la lógica para activar el dispositivo
-    alert(`Activar dispositivo: ${device.name}`);
-    // Por ejemplo, podrías hacer un POST o PUT a tu backend para cambiar el estado
+    Swal.fire({
+      icon: 'info',
+      title: `Activar dispositivo: ${device.name}`,
+      text: 'Aquí puedes implementar la lógica para activar el dispositivo.',
+      confirmButtonText: 'Aceptar'
+    });
   }
 }

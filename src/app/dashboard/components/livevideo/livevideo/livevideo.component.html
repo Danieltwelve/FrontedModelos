@@ -17,10 +17,19 @@
           <td>{{ device.type }}</td>
           <td>{{ device.location }}</td>
           <td class="action-cell">
-            <button *ngIf="device.status === 'INACTIVE'" class="btn btn-activate" (click)="activarDispositivo(device)">
+            <button
+              *ngIf="device.status === 'INACTIVE'"
+              class="btn btn-activate"
+              (click)="activarDispositivo(device)">
               Activar
             </button>
-            <span *ngIf="device.status !== 'INACTIVE'" class="status-label">Activa</span>
+            <button
+              *ngIf="device.status !== 'INACTIVE'"
+              class="btn btn-deactivate"
+              (click)="desactivarDispositivo(device)">
+              Desactivar
+            </button>
+            <!-- <span *ngIf="device.status !== 'INACTIVE'" class="status-label">Activa</span> -->
           </td>
         </tr>
       </tbody>

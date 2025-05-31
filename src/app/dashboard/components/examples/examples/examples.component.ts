@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';  // Add this import
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface MediaItem {
@@ -16,68 +14,78 @@ interface MediaItem {
 @Component({
   selector: 'app-examples',
   standalone: true,
-  imports: [CommonModule, FormsModule],  // Add FormsModule here
+  imports: [CommonModule],
   templateUrl: './examples.component.html',
   styleUrl: './examples.component.css'
 })
 export class ExamplesComponent {
   modalAbierto = false;
-  modalContenido: 'video' | 'imagen' | 'contador' | '' = '';
-  videoUrl: string = '';
-  videoIniciado = false;
-  imagenUrl: string | ArrayBuffer | null = null;
-  selectedCategory: 'all' | 'videos' | 'images' = 'all';
   mediaSeleccionada: MediaItem | null = null;
-  
+  selectedCategory: 'all' | 'videos' | 'images' = 'all';
+
   mediaItems: MediaItem[] = [
     {
       id: 1,
       type: 'video',
-      title: 'Detección de Objetos',
-      description: 'Ejemplo de detección de objetos en video',
-      url: 'assets/videos/detection.mp4',
-      thumbnail: 'assets/thumbnails/detection.jpg'
+      title: 'Detección de Objetos (Video)',
+      description: 'Ejemplo de detección de objetos en un video de stock',
+      url: 'https://www.youtube.com/embed/rMfi7GXlFV8?si=5ERVj9Ir0nuYCRvT',
+      thumbnail: 'assets/thumbnails/vd1.png'
     },
     {
       id: 2,
       type: 'video',
-      title: 'Contador Vehicular',
-      description: 'Ejemplo de conteo de vehículos',
-      url: 'https://www.youtube.com/embed/XmmnDo_77KU', // Cambia aquí
-      thumbnail: 'assets/thumbnails/counter.jpg'
+      title: 'Contador Vehicular (Video)',
+      description: 'Ubicación: Chimayoy',
+      url: 'https://www.youtube.com/embed/XmmnDo_77KU',
+      thumbnail: 'assets/thumbnails/counter.png'
     },
     {
       id: 3,
       type: 'image',
       title: 'Detección en Imagen',
-      description: 'Ejemplo de detección en imagen estática',
-      url: 'assets/images/detection1.jpg'
+      description: 'Vuelta Nariño',
+      url: 'assets/images/example1.jpg'
+    },
+    {
+      id: 4,
+      type: 'image',
+      title: 'Detección en Imagen',
+      description: 'Ubicación: Altos de Daza',
+      url: 'assets/images/example2.jpg'
+    },
+    {
+      id: 5,
+      type: 'image',
+      title: 'Detección en Imagen',
+      description: 'Ubicación: Volcan Cumbal',
+      url: 'assets/images/example3.png'
+    },
+    {
+      id: 6,
+      type: 'image',
+      title: 'Detección en Imagen',
+      description: 'Ubicación: Laguna de la Cocha',
+      url: 'assets/images/example4.png'
+    },
+    {
+      id: 7,
+      type: 'image',
+      title: 'Detección en Imagen',
+      description: 'Ciclopaseo Facing',
+      url: 'assets/images/example5.png'
+    },
+    {
+      id: 8,
+      type: 'video',
+      title: 'Detección Noche (Video)',
+      description: 'Ejemplo de uso del modelo YOLOv11 en condiciones de poca luz',
+      url: 'https://www.youtube.com/embed/Z-_jCn__GP8?si=82OQChgDrTIMgc-L',
+      thumbnail: 'assets/thumbnails/vn.png'
     }
-    
   ];
 
-  constructor(private http: HttpClient, public sanitizer: DomSanitizer) {}
-
-  enviarVideoUrl() {
-    const body = { url: this.videoUrl };
-    this.http.post('http://localhost:5001/videourl', body).subscribe({
-      next: () => {
-        this.videoIniciado = true;
-      },
-      error: (err) => {
-        alert('Error al enviar la URL del video');
-        console.error(err);
-      }
-    });
-  }
-
-  abrirModal(tipo: 'video' | 'imagen' | 'contador') {
-    this.modalAbierto = true;
-    this.modalContenido = tipo;
-    this.videoUrl = '';
-    this.videoIniciado = false;
-    this.imagenUrl = null;
-  }
+  constructor(public sanitizer: DomSanitizer) {}
 
   abrirModalMedia(item: MediaItem) {
     this.mediaSeleccionada = item;
@@ -87,35 +95,6 @@ export class ExamplesComponent {
   cerrarModal() {
     this.modalAbierto = false;
     this.mediaSeleccionada = null;
-    this.modalContenido = '';
-    this.videoUrl = '';
-    this.imagenUrl = null;
-  }
-
-  onImageSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.imagenUrl = reader.result;
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  cancelarVideoUrl() {
-    this.http.post('http://localhost:5002/stop', {}, { responseType: 'text' }).subscribe({
-      next: () => {
-        this.videoIniciado = false;
-        this.videoUrl = '';
-      },
-      error: (err) => {
-        alert('Error al detener el video');
-        console.error(err);
-        this.videoIniciado = false;
-        this.videoUrl = '';
-      }
-    });
   }
 
   filterByType(type: 'all' | 'videos' | 'images') {
@@ -124,7 +103,7 @@ export class ExamplesComponent {
 
   getFilteredItems() {
     if (this.selectedCategory === 'all') return this.mediaItems;
-    return this.mediaItems.filter(item => 
+    return this.mediaItems.filter(item =>
       this.selectedCategory === 'videos' ? item.type === 'video' : item.type === 'image'
     );
   }

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -49,23 +50,43 @@ export class UsersComponent implements OnInit {
 
   eliminarUsuario(user: any) {
     if (!user || !user.id) return;
-    if (!confirm(`¿Seguro que deseas eliminar al usuario ${user.username}?`)) return;
+    Swal.fire({
+      title: `¿Seguro que deseas eliminar al usuario ${user.username}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#e53935'
+    }).then(result => {
+      if (!result.isConfirmed) return;
 
-    const token = localStorage.getItem('access_token');
-    if (!token) return;
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+      const token = localStorage.getItem('access_token');
+      if (!token) return;
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
 
-    this.http.delete(`http://localhost:8081/users/${user.id}`, { headers, responseType: 'text' }).subscribe({
-      next: () => {
-        this.users = this.users.filter(u => u.id !== user.id);
-        alert('Usuario eliminado correctamente');
-      },
-      error: (err) => {
-        alert('Error al eliminar usuario');
-        console.error(err);
-      }
+      this.http.delete(`http://localhost:8081/users/${user.id}`, { headers, responseType: 'text' }).subscribe({
+        next: () => {
+          this.users = this.users.filter(u => u.id !== user.id);
+          Swal.fire({
+            icon: 'success',
+            title: 'Usuario eliminado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al eliminar usuario',
+            text: 'No se pudo eliminar el usuario.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#e53935'
+          });
+          console.error(err);
+        }
+      });
     });
   }
   modificarUsuario(user: any) {
@@ -103,10 +124,21 @@ export class UsersComponent implements OnInit {
         const idx = this.users.findIndex(u => u.id === this.editUser.id);
         if (idx !== -1) this.users[idx] = { ...this.editUser };
         this.selectedUser = null;
-        alert('Usuario modificado correctamente');
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario modificado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error: (err) => {
-        alert('Error al modificar usuario');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al modificar usuario',
+          text: 'No se pudo modificar el usuario.',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#e53935'
+        });
         console.error(err);
       }
     });
@@ -128,7 +160,6 @@ export class UsersComponent implements OnInit {
       .subscribe({
         next: (createdUser) => {
           if (createdUser.id) {
-            // Solo si se creó correctamente y hay id
             this.http.post(
               `http://localhost:8081/users/${createdUser.id}/send-verify-email`,
               {},
@@ -138,20 +169,42 @@ export class UsersComponent implements OnInit {
                 this.cargarUsuarios();
                 this.nuevoUsuario = { username: '', firstName: '', lastName: '', email: '', password: '', roles: ['user'] };
                 this.mostrarFormularioAgregar = false;
-                alert('Usuario agregado correctamente, se ha enviado un correo de verificación al usuario');
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Usuario agregado correctamente',
+                  text: 'Se ha enviado un correo de verificación al usuario',
+                  showConfirmButton: false,
+                  timer: 1800
+                });
               },
               error: (err) => {
-                alert('Usuario agregado, pero error al enviar correo de verificación');
+                Swal.fire({
+                  icon: 'warning',
+                  title: 'Usuario agregado, pero error al enviar correo de verificación',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: '#e53935'
+                });
                 console.error(err);
               }
             });
           } else {
-            // Si no hay id, muestra el mensaje de error del backend
-            alert(createdUser.message || 'No se pudo crear el usuario');
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo crear el usuario',
+              text: createdUser.message || 'Error desconocido',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#e53935'
+            });
           }
         },
         error: (err) => {
-          alert(err.error?.error || err.error || 'Error al agregar usuario');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al agregar usuario',
+            text: err.error?.error || err.error || 'Error al agregar usuario',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#e53935'
+          });
           console.error(err);
         }
       });
