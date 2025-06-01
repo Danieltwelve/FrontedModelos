@@ -1,200 +1,212 @@
 /* SIDEBAR */
 #sidebar {
-  position: fixed;
-  max-width: 260px;
-  width: 100%;
-  background: #9c9c9c;
-  top: 0;
-  left: 0;
-  height: 100%;
-  overflow-y: auto;
-  scrollbar-width: none;
-  transition: all .3s ease;
-  z-index: 200;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #FFFFFF;
- 
-}
-
-.logo-img {
-  width: 36px;
-  height: auto;
-  margin-right: 12px;
+    position: fixed;
+    max-width: 260px;
+    width: 100%;
+    background: #212121; /* Gris muy oscuro, casi negro como en la imagen de referencia */
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    transition: all 0.3s ease;
+    z-index: 200;
+    box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar.hide {
-  max-width: 60px;
+    max-width: 60px;
 }
 
 #sidebar.hide:hover {
-  max-width: 260px;
+    max-width: 260px;
 }
 
 #sidebar::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 #sidebar .brand {
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  height: 64px;
-  font-weight: 700;
-  color:#FFD100; 
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  background: #062236;
-  transition: all .3s ease;
-  padding: 0 6px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center; /* Esto es clave para alinear verticalmente */
+    height: 64px;
+    font-weight: 700;
+    color: #ffffff; /* Blanco para el texto del logo */
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: #212121; /* Mismo color de fondo que el sidebar */
+    transition: all 0.3s ease;
+    padding: 0 20px; /* Aumenta el padding horizontal para el espacio inicial */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box; /* Importante para que el padding no desborde el ancho */
+}
+
+/* Estilo específico para el H1 dentro del brand */
+#sidebar .brand h1 {
+    margin: 0; /* Elimina el margen por defecto del H1 */
+    padding: 0; /* Elimina el padding por defecto del H1 */
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    overflow: hidden; /* Oculta cualquier texto que se desborde si el sidebar es muy pequeño */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto se corta */
+}
+
+/* Estilo para la imagen del logo dentro del brand */
+.logo-img {
+    width: 36px;
+    height: auto;
+    margin-right: 12px; /* Margen a la derecha de la imagen para separar del texto */
+    display: block; /* Asegura que la imagen se comporte como un bloque para el margen */
 }
 
 #sidebar .icon {
-  min-width: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 6px;
+    min-width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 6px;
+    color: #bdbdbd; /* Color por defecto para los íconos */
 }
 
 #sidebar .icon-right {
-  margin-left: auto;
-  transition: all .3s ease;
+    margin-left: auto;
+    transition: all 0.3s ease;
 }
 
 #sidebar .side-menu {
-  margin: 36px 0;
-  padding: 0 20px;
-  transition: all .3s ease;
+    margin: 36px 0;
+    padding: 0 20px;
+    transition: all 0.3s ease;
 }
 
 #sidebar.hide .side-menu {
-  padding: 0 6px;
+    padding: 0 6px;
 }
 
 #sidebar.hide:hover .side-menu {
-  padding: 0 20px;
+    padding: 0 20px;
 }
 
 #sidebar .side-menu button {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  color: #000;
-  padding: 12px 16px 12px 0;
-  transition: all .3s ease;
-  border-radius: 10px;
-  margin: 4px 0;
-  white-space: nowrap;
-  background: transparent;
-  border: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #bdbdbd; /* Un gris más claro para el texto de los botones inactivos */
+    padding: 12px 16px; /* Ajustado el padding para dar margen interno */
+    margin: 8px 0; /* Margen entre botones */
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    white-space: nowrap;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
 }
 
 #sidebar .side-menu > li > button:hover {
-  background: #F1F0F6;
+    background: #3a3a3a; /* Un gris ligeramente más claro al pasar el mouse */
+    color: #ffffff; /* Texto blanco al pasar el mouse */
 }
 
-#sidebar .side-menu > li > button.active .icon-right {
-  transform: rotateZ(90deg);
-}
-
+/* Estilo para el botón activo o clickeado (clase 'active') */
 #sidebar .side-menu > li > button.active,
 #sidebar .side-menu > li > button.active:hover {
-  background: #1775F1;
-  color: #fff;
+    background: #ffd100; /* Amarillo brillante como en la imagen de referencia para el botón activo */
+    color: #212121; /* Color de texto oscuro para el botón activo para que contraste */
+}
+
+/* Estilo para el ícono del botón activo */
+#sidebar .side-menu > li > button.active .icon {
+    color: #212121; /* Color oscuro para los íconos del botón activo */
+}
+
+
+#sidebar .side-menu > li > button.active .icon-right {
+    transform: rotateZ(90deg);
 }
 
 #sidebar .divider {
-  margin-top: 24px;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #8D8D8D;
-  transition: all .3s ease;
-  white-space: nowrap;
+    margin-top: 24px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #8d8d8d;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 #sidebar.hide:hover .divider {
-  text-align: left;
+    text-align: left;
 }
 
 #sidebar.hide .divider {
-  text-align: center;
+    text-align: center;
 }
 
 #sidebar .side-dropdown {
-  padding-left: 54px;
-  max-height: 0;
-  overflow-y: hidden;
-  transition: all .15s ease;
+    padding-left: 54px;
+    max-height: 0;
+    overflow-y: hidden;
+    transition: all 0.15s ease;
 }
 
 #sidebar .side-dropdown.show {
-  max-height: 1000px;
+    max-height: 1000px;
 }
 
 #sidebar .side-dropdown button:hover {
-  color: #1775F1;
+    color: #1775f1;
 }
 
 #sidebar .ads {
-  width: 100%;
-  padding: 20px;
+    width: 100%;
+    padding: 20px;
 }
 
 #sidebar.hide .ads {
-  display: none;
+    display: none;
 }
 
 #sidebar.hide:hover .ads {
-  display: block;
+    display: block;
 }
 
 #sidebar .ads .wrapper {
-  background: #F1F0F6;
-  padding: 20px;
-  border-radius: 10px;
+    background: #f1f0f6;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 #sidebar .btn-upgrade {
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 0;
-  color: #fff;
-  background: #1775F1;
-  transition: all .3s ease;
-  border-radius: 5px;
-  font-weight: 600;
-  margin-bottom: 12px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+    color: #fff;
+    background: #1775f1;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-bottom: 12px;
 }
 
 #sidebar .btn-upgrade:hover {
-  background: #0C5FCD;
+    background: #0c5fcd;
 }
 
 #sidebar .ads .wrapper p {
-  font-size: 12px;
-  color: #8D8D8D;
-  text-align: center;
+    font-size: 12px;
+    color: #8d8d8d;
+    text-align: center;
 }
 
 #sidebar .ads .wrapper p span {
-  font-weight: 700;
-} 
+    font-weight: 700;
+}

@@ -19,13 +19,10 @@
   --red: #FC3B56;
 }
 
-html {
-  overflow-x: hidden;
-}
-
-body {
-  background: var(--grey);
-  overflow-x: hidden;
+/* Modificación crucial para el HTML y BODY */
+html, body {
+  height: 100%; /* Asegura que html y body ocupen toda la altura del viewport */
+  overflow: hidden; /* Evita que html y body tengan scrollbars, el scroll será gestionado internamente */
 }
 
 a {
@@ -36,30 +33,72 @@ li {
   list-style: none;
 }
 
-/* CONTENT */
+/* El componente DashboardComponent (host) contendrá todo el layout */
+/* Le damos un display flex para que el sidebar y el contenido estén uno al lado del otro */
+:host { /* Selecciona el elemento host de tu DashboardComponent */
+  display: flex;
+  height: 100vh; /* Ocupa el 100% de la altura del viewport */
+  width: 100vw; /* Ocupa el 100% del ancho del viewport */
+  /* El background del body aquí puede ir en el :host si quieres que sea todo el dashboard */
+  background: var(--grey); /* Color de fondo general del dashboard */
+}
+
+app-slidebar {
+
+}
+
+
+/* CONTENT - El contenedor a la derecha del sidebar, que contiene el navbar y el main */
 #content {
-  position: relative;
-  width: calc(100% - 260px);
-  left: 260px;
+  position: relative; /* Necesario para que el z-index de app-navbar funcione correctamente si es fixed/sticky */
+  margin-left: 260px; /* Empuja el contenido a la derecha del sidebar (ancho del sidebar) */
+  width: calc(100% - 260px); /* Ocupa el ancho restante de la pantalla */
   transition: all .3s ease;
+  display: flex; /* Convierte #content en un contenedor flex */
+  flex-direction: column; /* Apila app-navbar y main verticalmente */
+  height: 100%; /* Ocupa el 100% de la altura de su padre (:host) */
+  overflow-y: hidden; /* Importante: #content NO debe tener scroll. Lo gestionará 'main' */
 }
 
-#sidebar.hide + #content {
+
+/* Si #sidebar.hide se aplica directamente al elemento app-slidebar: */
+app-slidebar.hide + #content { /* Esta regla funciona si #sidebar.hide es un sibling en el flujo normal */
   width: calc(100% - 60px);
-  left: 60px;
+  margin-left: 60px;
 }
 
-/* MAIN */
-main {
-  width: 100%;
-  padding: 24px 20px 20px 20px;
+
+/* APP-NAVBAR - Tu componente de barra de navegación superior */
+app-navbar {
+  /* No necesita position: fixed aquí, ya que su padre (#content) gestiona la altura */
+  height: 64px; /* Altura fija de tu navbar */
+  min-height: 64px; /* Asegura que no se encoja si el contenido es mucho */
+  width: 100%; /* Ocupa todo el ancho disponible dentro de #content */
+  background: var(--light); /* Color de fondo del navbar */
+  border-bottom: 1px solid var(--grey); /* Línea divisoria inferior del navbar */
+  z-index: 10; /* Asegura que esté por encima del contenido principal */
+  /* Puedes añadir un box-shadow si quieres una sombra debajo del navbar */
+  /* box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); */
 }
+
+
+/* MAIN - El contenedor donde se renderiza el router-outlet */
+main {
+  flex-grow: 1; /* ¡Esto es CLAVE! Hace que 'main' ocupe todo el espacio vertical restante dentro de #content */
+  overflow-y: auto; /* ¡AQUÍ ES DONDE SE HABILITA LA BARRA DE SCROLL VERTICAL! */
+  padding: 24px 20px 20px 20px; /* Tu padding original */
+  /* Puedes añadir un background aquí si quieres un color de fondo diferente para el área de contenido scrollable */
+  /* background: var(--light); */
+}
+
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
+  /* Si en móviles el sidebar se oculta o se superpone, ajusta el margin-left de #content */
+  /* Esto dependerá de la lógica de tu sidebar responsive */
   #content {
-    position: relative;
-    width: calc(100% - 60px);
-    transition: all .3s ease;
+    /* Por ejemplo, si el sidebar se superpone o es un overlay en móvil, el margin-left debería ser 0 */
+    /* margin-left: 0; */
+    /* width: 100%; */
   }
 }
