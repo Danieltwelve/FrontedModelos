@@ -17,8 +17,8 @@
 }
 
 .filters button.active {
-  background: #007bff;
-  color: white;
+  background: #ffd100;
+  color: rgb(19, 18, 18);
 }
 
 .media-grid {

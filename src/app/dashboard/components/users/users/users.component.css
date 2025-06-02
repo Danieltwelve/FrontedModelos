@@ -146,3 +146,113 @@ form input {
     text-align: left;
   }
 }
+/* Fondo difuminado para formularios como modales */
+/* Fondo difuminado para formularios como modales */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Contenedor visual del formulario modal */
+.modal.centered-form {
+  background-color: #ffffff;
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+  z-index: 1010;
+}
+
+/* Formulario limpio tipo grid vertical */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Agrupación de campos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+/* Inputs uniformes */
+.input-field {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: #0b3c61;
+  outline: none;
+}
+
+/* Contraseña con botón mostrar */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .input-field {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Botones del formulario */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Mensaje de error */
+.error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

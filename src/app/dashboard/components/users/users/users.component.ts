@@ -14,6 +14,10 @@ import Swal from 'sweetalert2';
 export class UsersComponent implements OnInit {
   users: any[] = [];
   selectedUser: any = null;
+  mostrarPassword: boolean = false;
+  mostrarPasswordEditar: boolean = false;
+
+
   editUser: any = {};
   mostrarFormularioAgregar = false;
   nuevoUsuario: any = {
