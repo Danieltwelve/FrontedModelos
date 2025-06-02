@@ -1,24 +1,33 @@
-<!-- SIDEBAR -->
 <section id="sidebar">
-  <button class="brand" (click)="navigateTo('landing-page')">
-    <img src="assets/detect_logo.png" alt="Logo" class="logo-img" /><h1>Detect</h1>
-  </button>
+  <button class="brand" (click)="navigateTo('landing-page')" [class.active]="activeRoute === 'landing-page'">
+  <img src="assets/detect_logo.png" alt="Logo" class="logo-img" />
+  <h1>Detect</h1>
+</button>
   <ul class="side-menu">
     <li>
-      <button (click)="navigateTo('home')"><i class='bx bxs-dashboard icon'></i> Inicio</button>
-    </li>  
-    <li>
-      <button (click)="navigateTo('users')"><i class='bx bxs-chart icon'></i> Usuarios</button>
+      <button (click)="navigateTo('home')" [class.active]="activeRoute === 'home'">
+        <i class='bx bxs-dashboard icon'></i> Inicio
+      </button>
     </li>
     <li>
-      <button (click)="navigateTo('devices')"><i class='bx bxs-widget icon'></i> Equipos</button>
+      <button (click)="navigateTo('users')" [class.active]="activeRoute === 'users'">
+        <i class='bx bxs-chart icon'></i> Usuarios
+      </button>
     </li>
     <li>
-      <button (click)="navigateTo('examples')"><i class='bx bx-book icon'></i> Ejemplos</button>
+      <button (click)="navigateTo('devices')" [class.active]="activeRoute === 'devices'">
+        <i class='bx bxs-widget icon'></i> Equipos
+      </button>
     </li>
     <li>
-      <button (click)="navigateTo('livevideo')"><i class='bx bx-video icon'></i> Video en vivo</button>
+      <button (click)="navigateTo('examples')" [class.active]="activeRoute === 'examples'">
+        <i class='bx bx-book icon'></i> Ejemplos
+      </button>
+    </li>
+    <li>
+      <button (click)="navigateTo('livevideo')" [class.active]="activeRoute === 'livevideo'">
+        <i class='bx bx-video icon'></i> Video en vivo
+      </button>
     </li>
   </ul>
 </section>
-<!-- SIDEBAR -->
