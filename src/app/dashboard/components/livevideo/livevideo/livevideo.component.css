@@ -15,28 +15,71 @@
 
 /* Tabla */
 .table-container {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
   overflow-x: auto;
 }
 
 .devices-table {
   width: 100%;
-  border-collapse: collapse;
-  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  background-color: #fff;
+  font-size: 1rem;
+  background: #fff;
 }
 
 .devices-table th,
 .devices-table td {
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.2rem;
   text-align: left;
-  border-bottom: 1px solid #eee;
 }
 
-.devices-table thead {
-  background-color: #f0f4f8;
-  color: #333;
+.devices-table thead th {
+  background: #f5f7fa;
+  font-weight: 600;
+  border-bottom: 2px solid #e0e6ed;
+}
+
+.device-row {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+
+.device-row:hover {
+  background: #f8fafc;
+}
+
+.device-name, .device-type, .device-location {
+  font-weight: 500;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.status-dot.active {
+  background: #43a047;
+  box-shadow: 0 0 6px #43a04766;
+}
+
+.status-dot.inactive {
+  background: #bdbdbd;
+}
+
+.status-label {
+  font-size: 0.98em;
+  color: #555;
+  vertical-align: middle;
 }
 
 .action-cell {
@@ -44,9 +87,17 @@
   align-items: center;
 }
 
-.status-label {
-  color: green;
-  font-weight: bold;
+.action-cell .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.5em 1.2em;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
 /* Botones */
@@ -60,21 +111,21 @@
 }
 
 .btn-activate {
-  background-color: #28a745;
-  color: white;
+  background: #43a047;
+  color: #fff;
 }
 
 .btn-activate:hover {
-  background-color: #218838;
+  background: #388e3c;
 }
 
 .btn-deactivate {
-  background-color: #e53935 !important;
-  color: #fff !important;
-  border: none;
+  background: #e53935;
+  color: #fff;
 }
+
 .btn-deactivate:hover {
-  background-color: #b71c1c !important;
+  background: #b71c1c;
 }
 
 /* Video */
@@ -139,4 +190,18 @@
   border-radius: 8px !important;
   padding: 8px 16px !important;
   font-weight: bold;
+}
+
+/* Bordes redondeados en la cabecera y el pie */
+.devices-table th:first-child {
+  border-top-left-radius: 12px;
+}
+.devices-table th:last-child {
+  border-top-right-radius: 12px;
+}
+.devices-table tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+.devices-table tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
 }

@@ -172,7 +172,7 @@ export class UsersComponent implements OnInit {
                 Swal.fire({
                   icon: 'success',
                   title: 'Usuario agregado correctamente',
-                  text: 'Se ha enviado un correo de verificación al usuario',
+                  text: 'Se ha enviado un correo de verificación, para ingresar debes tener verificado tu correo.',
                   showConfirmButton: false,
                   timer: 1800
                 });

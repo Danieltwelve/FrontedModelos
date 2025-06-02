@@ -17,6 +17,7 @@
           [(ngModel)]="username"
           name="username"
           required
+          (input)="clearError()"
         />
         <i class="fas fa-user icon"></i>
       </div>
@@ -28,15 +29,15 @@
           [(ngModel)]="password"
           name="password"
           required
+          (input)="clearError()"
         />
         <i class="fas fa-lock icon"></i>
       </div>
 
 
       <button type="submit" class="login-btn">Iniciar sesión</button>
-
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
+      <div style="margin-top: 1.2em; min-height: 2em;">
+        <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
       </div>
     </form>
 
