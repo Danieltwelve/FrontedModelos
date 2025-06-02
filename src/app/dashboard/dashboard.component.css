@@ -92,6 +92,51 @@ main {
 }
 
 
+/* FOOTER - Estilos para el pie de página */
+.main-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  z-index: 9999; /* Muy alto para evitar conflictos */
+  background: #23272f;
+  color: #fff;
+  padding: 0.3em 0;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;   /* Alinea a la izquierda */
+  gap: 1em;
+  max-width: 1200px;
+  margin: 0 0 0 2em;            /* Espacio a la izquierda */
+}
+
+.footer-logo {
+  height: 24px;               /* Más pequeño */
+  width: auto;
+}
+
+.footer-text {
+  font-size: 0.95em;
+  opacity: 0.85;
+}
+
+.footer-link {
+  color: #90caf9;
+  text-decoration: none;
+  margin-left: 1em;
+  font-size: 0.95em;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+
+
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   /* Si en móviles el sidebar se oculta o se superpone, ajusta el margin-left de #content */
