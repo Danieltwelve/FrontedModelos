@@ -1,21 +1,23 @@
 <div *ngIf="isBrowser" class="stats-container">
-  <!-- Barras -->
-  <div class="card">
-    <canvas #barChart></canvas>
-  </div>
-
-  <!-- Pastel -->
-  <div class="card">
-    <canvas #pieChart></canvas>
-  </div>
-
-  <!-- Línea -->
-  <div class="card">
+  <div class="card large">
     <canvas #lineChart></canvas>
   </div>
 
-  <!-- Radar -->
-  <div class="card">
-    <canvas #radarChart></canvas>
+  <div class="small-charts">
+    <div class="card">
+      <canvas #barChart></canvas>
+    </div>
+
+    <div class="card">
+      <canvas #pieChart></canvas>
+    </div>
+
+    <div class="card">
+      <canvas #radarChart></canvas>
+    </div>
   </div>
+</div>
+
+<div *ngIf="!isBrowser" style="text-align: center; padding: 20px; color: #888;">
+  Este componente requiere un entorno de navegador para mostrar las gráficas.
 </div>
