@@ -6,11 +6,10 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between; /* Esto distribuye el espacio y empuja los elementos a los extremos */
-    grid-gap: 28px; /* Puedes ajustar este gap si tienes más elementos entre el formulario y el perfil */
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 10;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añadido un pequeño box-shadow para un efecto de elevación */
 }
 
@@ -92,6 +91,9 @@ nav .divider {
 nav .profile {
     position: relative;
     margin-left: auto; /* Esto empuja el div 'profile' completamente a la derecha */
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
 }
 
 nav .profile img {
@@ -103,6 +105,13 @@ nav .profile img {
     display: block; /* Asegura que la imagen ocupe su propio espacio */
 }
 
+nav .profile .username {
+    font-weight: 600;
+    color: #23272f;
+    margin-right: 0.5em;
+}
+
+/* Opcional: menú desplegable para perfil */
 nav .profile .profile-link {
     position: absolute;
     top: calc(100% + 10px);
@@ -126,10 +135,10 @@ nav .profile .profile-link.show {
 nav .profile .profile-link a {
     padding: 10px 16px;
     display: flex;
-    grid-gap: 10px;
+    gap: 10px;
+    color: #23272f;
+    text-decoration: none;
     font-size: 14px;
-    color: #000;
-    align-items: center;
     transition: all .3s ease;
 }
 
