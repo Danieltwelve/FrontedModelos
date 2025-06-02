@@ -45,14 +45,18 @@ export class LoginComponent {
         localStorage.setItem('access_token', response.access_token);
         console.log('Token generado:', response.access_token);
         // Redirigir a la página prueba
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard/home']);
       },
       error: (error) => {
         console.error('Error al obtener el token:', error);
-        this.errorMessage = 'Usuario o contraseña incorrectos';
+        this.errorMessage = 'Usuario o contraseña incorrectos o correo no verificado.';
       }
     });
 
 
+  }
+
+  clearError() {
+    this.errorMessage = '';
   }
 }
