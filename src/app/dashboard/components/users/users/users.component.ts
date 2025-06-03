@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -17,9 +17,9 @@ export class UsersComponent implements OnInit {
   mostrarPassword: boolean = false;
   mostrarPasswordEditar: boolean = false;
 
-
   editUser: any = {};
   mostrarFormularioAgregar = false;
+  mostrarGestion = false; // <-- AGREGA ESTA LÍNEA
   nuevoUsuario: any = {
     username: '',
     firstName: '',
@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -53,6 +53,8 @@ export class UsersComponent implements OnInit {
   }
 
   eliminarUsuario(user: any) {
+    this.mostrarGestion = false;
+
     if (!user || !user.id) return;
     Swal.fire({
       title: `¿Seguro que deseas eliminar al usuario ${user.username}?`,
@@ -93,8 +95,9 @@ export class UsersComponent implements OnInit {
       });
     });
   }
+
   modificarUsuario(user: any) {
-    // Copia los datos del usuario seleccionado
+    this.mostrarGestion = false; // <-- Cierra el modal de gestión
     this.selectedUser = user;
     this.editUser = { ...user };
   }
@@ -115,8 +118,8 @@ export class UsersComponent implements OnInit {
       firstName: this.editUser.firstName,
       lastName: this.editUser.lastName,
       email: this.editUser.email,
-      password: this.editUser.password || '', // Puedes pedir el password en el formulario si es obligatorio
-      roles: this.editUser.roles || ['user']  // Ajusta según tu lógica de roles
+      password: this.editUser.password || '',
+      roles: this.editUser.roles || ['user']
     };
 
     this.http.put(
@@ -150,6 +153,7 @@ export class UsersComponent implements OnInit {
 
   cancelarEdicion() {
     this.selectedUser = null;
+    this.editUser = {};
   }
 
   agregarUsuario() {
