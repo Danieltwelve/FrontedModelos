@@ -221,6 +221,15 @@
   background: #b71c1c;
 }
 
+/* IMÁGENES DE LAS CARDS */
+.card-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   .modal-content {
@@ -231,4 +240,15 @@
   .modal-content-wide {
     min-width: 95vw !important;
   }
+}
+
+.btn-save {
+  background: #ffd100 !important;
+  color: #222 !important;
+  border: none;
+}
+
+.btn-save:hover {
+  background: #e6bc00 !important;
+  color: #222 !important;
 }

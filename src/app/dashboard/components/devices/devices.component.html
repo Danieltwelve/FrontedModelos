@@ -3,12 +3,14 @@
   <!-- Cards de menú -->
   <div class="devices-menu-cards">
     <div class="device-card" (click)="openModal('add')">
+      <img src="assets/ad.png" alt="Agregar dispositivo" class="card-img" />
       <h3>Agregar dispositivo</h3>
       <p>Registra un nuevo dispositivo en el sistema.</p>
     </div>
     <div class="device-card" (click)="openModal('manage')">
+      <img src="assets/gd.png" alt="Gestión de dispositivos" class="card-img" />
       <h3>Gestión de dispositivos</h3>
-      <p>Consulta, activa o desactiva los dispositivos existentes.</p>
+      <p>Consulta, modifica o elimina los dispositivos existentes.</p>
     </div>
   </div>
 
@@ -42,7 +44,9 @@
         </div>
 
 
-        <button type="submit" [disabled]="deviceForm.invalid">Guardar Dispositivo</button>
+        <button type="submit" [disabled]="deviceForm.invalid" class="btn btn-save">
+          <i class="fas fa-save"></i> Guardar Dispositivo
+        </button>
       </form>
     </div>
   </div>
@@ -69,8 +73,12 @@
             <td>{{ device.location }}</td>
             <td>{{ device.status }}</td>
             <td>
-              <button class="btn" (click)="modificarDispositivo(device)">Modificar</button>
-              <button class="btn" (click)="eliminarDispositivo(device)">Eliminar</button>
+              <button class="btn" (click)="modificarDispositivo(device)">
+                <i class="fas fa-edit"></i> Modificar
+              </button>
+              <button class="btn" (click)="eliminarDispositivo(device)">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </button>
               <!-- Puedes agregar más acciones aquí -->
             </td>
           </tr>
@@ -104,8 +112,12 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-        <button type="submit" [disabled]="editDeviceForm.invalid">Guardar Cambios</button>
-        <button type="button" class="btn" (click)="cancelarEdicionDispositivo()">Cancelar</button>
+        <button type="submit" [disabled]="editDeviceForm.invalid" class="btn btn-save">
+          <i class="fas fa-save"></i> Guardar Cambios
+        </button>
+        <button type="button" class="btn btn-cancel" (click)="cancelarEdicionDispositivo()">
+          <i class="fas fa-times-circle"></i> Cancelar
+        </button>
       </form>
     </div>
   </div>

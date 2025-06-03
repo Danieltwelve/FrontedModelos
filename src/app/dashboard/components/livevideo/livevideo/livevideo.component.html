@@ -21,26 +21,25 @@
               *ngIf="device.status === 'INACTIVE'"
               class="btn btn-activate"
               (click)="activarDispositivo(device)">
-              Activar
+              <i class="fas fa-play"></i> Activar
             </button>
             <button
               *ngIf="device.status !== 'INACTIVE'"
               class="btn btn-deactivate"
               (click)="desactivarDispositivo(device)">
-              Desactivar
+              <i class="fas fa-pause"></i> Desactivar
             </button>
-            <!-- <span *ngIf="device.status !== 'INACTIVE'" class="status-label">Activa</span> -->
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
 
-<!-- Stream de video -->
-<div class="video-box" *ngIf="showVideo">
-  <img #videoImage [src]="videoUrl" alt="Video en vivo" class="video-stream" />
-  <button (click)="openFullscreen(videoImage)" class="fullscreen-btn">
-    ⛶ Pantalla completa
-  </button>
+  <!-- Stream de video -->
+  <div class="video-box" *ngIf="showVideo">
+    <img #videoImage [src]="videoUrl" alt="Video en vivo" class="video-stream" />
+    <button (click)="openFullscreen(videoImage)" class="fullscreen-btn">
+      <i class="fas fa-expand"></i> Pantalla completa
+    </button>
+  </div>
 </div>
