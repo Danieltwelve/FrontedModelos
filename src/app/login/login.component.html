@@ -1,21 +1,46 @@
 <div class="login-container">
-    <div class="login-box">
-      <h2>Iniciar Sesión</h2>
-      <form>
-        <div class="textbox">
-          <input type="text" placeholder="Usuario" name="username" required>
-        </div>
-        <div class="textbox">
-          <input type="password" placeholder="Contraseña" name="password" required>
-        </div>
-        <div class="submit-button">
-          <input type="submit" value="Iniciar sesión">
-        </div>
-      </form>
-      <div class="links">
-        <a routerLink="/register" class="register-link">Registrarse</a> | 
-        <a href="#" class="forgot-password">¿Olvidó su contraseña?</a>
+  <div class="left-side">
+    <h2>¡Hola, Bienvenido!</h2>
+    <p>En detect el acceso es solo para cuentas verificadas.</p>
+    <button routerLink="/landing-page">Inicio</button>
+
+  </div>
+
+  <!-- Lado derecho con el formulario de login -->
+  <div class="right-side">
+    <h2>Iniciar Sesión</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input
+          type="text"
+          placeholder="Usuario"
+          [(ngModel)]="username"
+          name="username"
+          required
+          (input)="clearError()"
+        />
+        <i class="fas fa-user icon"></i>
       </div>
+
+      <div class="input-group ">
+        <input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="password"
+          name="password"
+          required
+          (input)="clearError()"
+        />
+        <i class="fas fa-lock icon"></i>
+      </div>
+
+
+      <button type="submit" class="login-btn">Iniciar sesión</button>
+      <div style="margin-top: 1.2em; min-height: 2em;">
+        <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
+      </div>
+    </form>
+
+    
     </div>
   </div>
-  

@@ -1,0 +1,169 @@
+<div class="users-container">
+  <!-- Cards de menú -->
+  <div class="users-menu-cards">
+    <div class="user-card" (click)="mostrarFormularioAgregar = true">
+      <img src="assets/au.png" alt="Agregar usuario" class="card-img" />
+      <h3>Agregar Usuario</h3>
+      <p>Registra un nuevo usuario en el sistema.</p>
+    </div>
+    <div class="user-card" (click)="mostrarGestion = true">
+      <img src="assets/gu.png" alt="Gestión de usuarios" class="card-img" />
+      <h3>Gestión de Usuarios</h3>
+      <p>Consulta y administra los usuarios existentes.</p>
+    </div>
+  </div>
+
+  <!-- Modal para agregar usuario -->
+  <div class="modal" *ngIf="mostrarFormularioAgregar" (click)="mostrarFormularioAgregar = false">
+    <div class="modal-content modal-content-wide" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="mostrarFormularioAgregar = false" title="Cerrar">&times;</button>
+      <h2>Agregar Usuario</h2>
+      <form (ngSubmit)="agregarUsuario()" #formAgregar="ngForm" class="form-grid">
+
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> Usuario</label>
+          <input [(ngModel)]="nuevoUsuario.username" name="username" required class="input-field" />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-id-badge"></i> Nombre</label>
+          <input [(ngModel)]="nuevoUsuario.firstName" name="firstName" required class="input-field" />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-id-badge"></i> Apellido</label>
+          <input [(ngModel)]="nuevoUsuario.lastName" name="lastName" required class="input-field" />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Email</label>
+          <input [(ngModel)]="nuevoUsuario.email" name="email" required type="email" class="input-field" />
+        </div>
+
+        <div class="form-group password-group">
+          <label><i class="fas fa-lock"></i> Contraseña</label>
+          <div class="password-wrapper">
+            <input [(ngModel)]="nuevoUsuario.password"
+                   name="password"
+                   [type]="mostrarPassword ? 'text' : 'password'"
+                   class="input-field"
+                   required
+                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
+                   #passwordRef="ngModel" />
+            <button type="button" class="toggle-password" (click)="mostrarPassword = !mostrarPassword">
+              <i [class]="mostrarPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
+          <div class="error" *ngIf="passwordRef.invalid && passwordRef.touched">
+            La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-save" [disabled]="formAgregar.invalid">
+            <i class="fas fa-save"></i> Guardar
+          </button>
+          <button type="button" class="btn btn-cancel" (click)="mostrarFormularioAgregar = false">
+          <i class="fas fa-times-circle"></i> Cancelar
+        </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para gestión de usuarios -->
+  <div class="modal" *ngIf="mostrarGestion" (click)="mostrarGestion = false">
+    <div class="modal-content modal-content-wide modal-content-gestion" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="mostrarGestion = false" title="Cerrar">&times;</button>
+      <h2>Gestión de Usuarios</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Email verificado</th>
+            <th>Fecha de creación</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.emailVerified ? 'Sí' : 'No' }}</td>
+            <td>
+              {{ user.createdTimestamp ? (user.createdTimestamp | date:'dd/MM/yyyy HH:mm':'UTC') : '-' }}
+            </td>
+            <td>
+              <button class="btn btn-edit" (click)="modificarUsuario(user)">
+                <i class="fas fa-edit"></i> Modificar
+              </button>
+              <button class="btn btn-delete" (click)="eliminarUsuario(user)">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal para editar usuario -->
+  <div class="modal" *ngIf="selectedUser" (click)="cancelarEdicion()">
+    <div class="modal-content modal-content-wide" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="cancelarEdicion()" title="Cerrar">&times;</button>
+      <h2>Modificar Usuario</h2>
+      <form (ngSubmit)="guardarCambiosUsuario()" #formEditar="ngForm" class="form-grid">
+
+        <div class="form-group">
+          <label><i class="fas fa-id-badge"></i> Nombre</label>
+          <input [(ngModel)]="editUser.firstName" name="firstName" required class="input-field" />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-id-badge"></i> Apellido</label>
+          <input [(ngModel)]="editUser.lastName" name="lastName" required class="input-field" />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Email</label>
+          <input [(ngModel)]="editUser.email" name="email" required type="email" class="input-field" />
+        </div>
+
+        <div class="form-group password-group">
+          <label><i class="fas fa-lock"></i> Contraseña</label>
+          <div class="password-wrapper">
+            <input [(ngModel)]="editUser.password"
+                   name="password"
+                   [type]="mostrarPasswordEditar ? 'text' : 'password'"
+                   class="input-field"
+                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
+                   #passwordEditRef="ngModel" />
+            <button type="button" class="toggle-password" (click)="mostrarPasswordEditar = !mostrarPasswordEditar">
+              <i [class]="mostrarPasswordEditar ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
+          <div class="error"
+               *ngIf="editUser.password && passwordEditRef.invalid && passwordEditRef.touched">
+            La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-save" [disabled]="formEditar.invalid">
+            <i class="fas fa-save"></i> Guardar
+          </button>
+          <button type="button" class="btn btn-cancel" (click)="cancelarEdicion()">
+            <i class="fas fa-times-circle"></i> Cancelar
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

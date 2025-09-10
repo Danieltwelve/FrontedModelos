@@ -1,0 +1,459 @@
+/* General */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 1rem;
+}
+
+/* Encabezado */
+.users-list h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1em;
+  font-size: 0.98em;
+}
+
+th, td {
+  padding: 0.8em 1em;
+  text-align: left;
+}
+
+th {
+  background: #ffe066;
+  color: #23272f;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+tr:hover {
+  background: #ffe066;
+}
+
+/* Contenedor botones en la tabla */
+td:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Botones */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  width: 120px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-edit {
+  background-color: #f0ad4e;
+}
+
+.btn-save {
+  background-color: #28a745;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+}
+
+.btn-toggle {
+  background-color: #28a745;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+/* Formularios */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #333;
+}
+
+form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Modal */
+/* MODAL OVERLAY */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* MODAL CONTENT */
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* MODAL CONTENT WIDE */
+.modal-content-wide {
+  max-width: 600px !important;
+  min-width: 400px !important;
+  width: 100% !important;
+}
+
+.modal-content-gestion {
+  max-width: 1000px !important;
+  min-width: 700px !important;
+  width: 90vw !important;
+}
+
+/* BOTÓN CERRAR */
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.18s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.close-btn:hover {
+  background: #b71c1c;
+}
+
+/* TITULO MODAL */
+.modal-content h2 {
+  margin-top: 0.2em;
+  margin-bottom: 1.2em;
+  font-size: 1.5em;
+  color: #23272f;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* FORMULARIO */
+.modal-content form {
+  width: 100%;
+  max-width: 500px;
+}
+
+.modal-content .form-group {
+  margin-bottom: 1.2em;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 0.4em;
+  color: #23272f;
+  font-weight: 500;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 0.6em 0.8em;
+  border: 1.2px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1em;
+  background: #fff;
+  transition: border 0.18s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #ffd100;
+  outline: none;
+}
+
+/* BOTONES DE ACCIÓN */
+.modal-content button[type="submit"],
+.modal-content .btn {
+  background: #ffd100;
+  color: #131212;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0.5em;
+  transition: all 0.18s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.modal-content button[type="submit"]:hover,
+.modal-content .btn:hover {
+  background: #e6bc00;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.modal-content .btn:last-child {
+  background: #f44336;
+  color: #fff;
+}
+
+.modal-content .btn:last-child:hover {
+  background: #b71c1c;
+}
+
+/* Responsive (opcional) */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 1rem;
+    font-weight: bold;
+    color: #555;
+    text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 1.5rem;
+    width: 95vw;
+  }
+  
+  .modal-content-wide {
+    min-width: 95vw !important;
+  }
+}
+
+/* Fondo difuminado para formularios como modales */
+/* Fondo difuminado para formularios como modales */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Contenedor visual del formulario modal */
+.modal.centered-form {
+  background-color: #ffffff;
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+  z-index: 1010;
+}
+
+/* Formulario limpio tipo grid vertical */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Agrupación de campos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+/* Inputs uniformes */
+.input-field {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: #0b3c61;
+  outline: none;
+}
+
+/* Contraseña con botón mostrar */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .input-field {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Botones del formulario */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Mensaje de error */
+.error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Contenedor principal */
+.users-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: none;
+}
+
+/* Cards de menú */
+.users-menu-cards {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: flex-start;   
+  margin: 2.5rem 0 3rem 0;      
+  max-width: none;
+}
+
+/* Card individual */
+.user-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 2.5rem 3rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+  min-width: 220px;
+  font-size: 1.1rem;
+}
+
+.user-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+  transform: translateY(-4px) scale(1.03);
+  background: #e3eafc;
+}
+
+.card-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 10px auto;
+}

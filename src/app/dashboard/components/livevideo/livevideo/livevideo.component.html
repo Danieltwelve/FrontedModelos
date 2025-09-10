@@ -1,0 +1,45 @@
+<div class="devices-container">
+  <h2 class="title">📡 Lista de Dispositivos</h2>
+
+  <div class="table-container">
+    <table class="devices-table">
+      <thead>
+        <tr>
+          <th>🔧 Nombre</th>
+          <th>📂 Tipo</th>
+          <th>📍 Ubicación</th>
+          <th>⚙️ Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let device of devices">
+          <td>{{ device.name }}</td>
+          <td>{{ device.type }}</td>
+          <td>{{ device.location }}</td>
+          <td class="action-cell">
+            <button
+              *ngIf="device.status === 'INACTIVE'"
+              class="btn btn-activate"
+              (click)="activarDispositivo(device)">
+              <i class="fas fa-play"></i> Activar
+            </button>
+            <button
+              *ngIf="device.status !== 'INACTIVE'"
+              class="btn btn-deactivate"
+              (click)="desactivarDispositivo(device)">
+              <i class="fas fa-pause"></i> Desactivar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Stream de video -->
+  <div class="video-box" *ngIf="showVideo">
+    <img #videoImage [src]="videoUrl" alt="Video en vivo" class="video-stream" />
+    <button (click)="openFullscreen(videoImage)" class="fullscreen-btn">
+      <i class="fas fa-expand"></i> Pantalla completa
+    </button>
+  </div>
+</div>

@@ -1,0 +1,149 @@
+/* General dashboard layout */
+* {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --grey: #F1F0F6;
+  --dark-grey: #8D8D8D;
+  --light: #fff;
+  --dark: #000;
+  --green: #81D43A;
+  --light-green: #E3FFCB;
+  --blue: #1775F1;
+  --light-blue: #D0E4FF;
+  --dark-blue: #0C5FCD;
+  --red: #FC3B56;
+}
+
+/* Modificación crucial para el HTML y BODY */
+html, body {
+  height: 100%; /* Asegura que html y body ocupen toda la altura del viewport */
+  overflow: hidden; /* Evita que html y body tengan scrollbars, el scroll será gestionado internamente */
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+/* El componente DashboardComponent (host) contendrá todo el layout */
+/* Le damos un display flex para que el sidebar y el contenido estén uno al lado del otro */
+:host { /* Selecciona el elemento host de tu DashboardComponent */
+  display: flex;
+  height: 100vh; /* Ocupa el 100% de la altura del viewport */
+  width: 100vw; /* Ocupa el 100% del ancho del viewport */
+  /* El background del body aquí puede ir en el :host si quieres que sea todo el dashboard */
+  background: var(--grey); /* Color de fondo general del dashboard */
+}
+
+app-slidebar {
+
+}
+
+
+/* CONTENT - El contenedor a la derecha del sidebar, que contiene el navbar y el main */
+#content {
+  position: relative; /* Necesario para que el z-index de app-navbar funcione correctamente si es fixed/sticky */
+  margin-left: 260px; /* Empuja el contenido a la derecha del sidebar (ancho del sidebar) */
+  width: calc(100% - 260px); /* Ocupa el ancho restante de la pantalla */
+  transition: all .3s ease;
+  display: flex; /* Convierte #content en un contenedor flex */
+  flex-direction: column; /* Apila app-navbar y main verticalmente */
+  height: 100%; /* Ocupa el 100% de la altura de su padre (:host) */
+  overflow-y: hidden; /* Importante: #content NO debe tener scroll. Lo gestionará 'main' */
+}
+
+
+/* Si #sidebar.hide se aplica directamente al elemento app-slidebar: */
+app-slidebar.hide + #content { /* Esta regla funciona si #sidebar.hide es un sibling en el flujo normal */
+  width: calc(100% - 60px);
+  margin-left: 60px;
+}
+
+
+/* APP-NAVBAR - Tu componente de barra de navegación superior */
+app-navbar {
+  /* No necesita position: fixed aquí, ya que su padre (#content) gestiona la altura */
+  height: 64px; /* Altura fija de tu navbar */
+  min-height: 64px; /* Asegura que no se encoja si el contenido es mucho */
+  width: 100%; /* Ocupa todo el ancho disponible dentro de #content */
+  background: var(--light); /* Color de fondo del navbar */
+  border-bottom: 1px solid var(--grey); /* Línea divisoria inferior del navbar */
+  z-index: 10; /* Asegura que esté por encima del contenido principal */
+  /* Puedes añadir un box-shadow si quieres una sombra debajo del navbar */
+  /* box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); */
+}
+
+
+/* MAIN - El contenedor donde se renderiza el router-outlet */
+main {
+  flex-grow: 1; /* ¡Esto es CLAVE! Hace que 'main' ocupe todo el espacio vertical restante dentro de #content */
+  overflow-y: auto; /* ¡AQUÍ ES DONDE SE HABILITA LA BARRA DE SCROLL VERTICAL! */
+  padding: 24px 20px 20px 20px; /* Tu padding original */
+  /* Puedes añadir un background aquí si quieres un color de fondo diferente para el área de contenido scrollable */
+  /* background: var(--light); */
+}
+
+
+/* FOOTER - Estilos para el pie de página */
+.main-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  z-index: 9999; /* Muy alto para evitar conflictos */
+  background: #23272f;
+  color: #fff;
+  padding: 0.3em 0;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;   /* Alinea a la izquierda */
+  gap: 1em;
+  max-width: 1200px;
+  margin: 0 0 0 2em;            /* Espacio a la izquierda */
+}
+
+.footer-logo {
+  height: 24px;               /* Más pequeño */
+  width: auto;
+}
+
+.footer-text {
+  font-size: 0.95em;
+  opacity: 0.85;
+}
+
+.footer-link {
+  color: #90caf9;
+  text-decoration: none;
+  margin-left: 1em;
+  font-size: 0.95em;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  /* Si en móviles el sidebar se oculta o se superpone, ajusta el margin-left de #content */
+  /* Esto dependerá de la lógica de tu sidebar responsive */
+  #content {
+    /* Por ejemplo, si el sidebar se superpone o es un overlay en móvil, el margin-left debería ser 0 */
+    /* margin-left: 0; */
+    /* width: 100%; */
+  }
+}

@@ -1,0 +1,124 @@
+<div class="devices-container">
+
+  <!-- Cards de menú -->
+  <div class="devices-menu-cards">
+    <div class="device-card" (click)="openModal('add')">
+      <img src="assets/ad.png" alt="Agregar dispositivo" class="card-img" />
+      <h3>Agregar dispositivo</h3>
+      <p>Registra un nuevo dispositivo en el sistema.</p>
+    </div>
+    <div class="device-card" (click)="openModal('manage')">
+      <img src="assets/gd.png" alt="Gestión de dispositivos" class="card-img" />
+      <h3>Gestión de dispositivos</h3>
+      <p>Consulta, modifica o elimina los dispositivos existentes.</p>
+    </div>
+  </div>
+
+  <!-- Modal para agregar dispositivo (ancho) -->
+  <div class="modal" *ngIf="modal === 'add'" (click)="closeModal()">
+    <div class="modal-content modal-content-wide" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeModal()" title="Cerrar">&times;</button>
+      <h2>Registrar Dispositivo</h2>
+      <form (ngSubmit)="onSubmit()" #deviceForm="ngForm">
+
+        <!-- Nombre del dispositivo -->
+        <div class="form-group">
+            <label for="name">Nombre (elige cámara):</label>
+            <select id="name" [(ngModel)]="device.name" name="name" required>
+                <option value="" disabled selected>Selecciona una cámara</option>
+                <option *ngFor="let camera of cameras" [value]="camera.label">{{ camera.label || camera.deviceId }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Tipo -->
+        <div class="form-group">
+            <label for="type">Tipo:</label>
+            <input type="text" id="type" name="type" [(ngModel)]="device.type" required maxlength="50" />
+        </div>
+
+        <!-- Ubicación -->
+        <div class="form-group">
+            <label for="location">Ubicación:</label>
+            <input type="text" id="location" name="location" [(ngModel)]="device.location" required maxlength="255" />
+        </div>
+
+
+        <button type="submit" [disabled]="deviceForm.invalid" class="btn btn-save">
+          <i class="fas fa-save"></i> Guardar Dispositivo
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para gestión de dispositivos (pequeño) -->
+  <div class="modal" *ngIf="modal === 'manage'" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeModal()" title="Cerrar">&times;</button>
+      <h2>Gestión de Dispositivos</h2>
+      <table class="devices-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Ubicación</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let device of devices">
+            <td>{{ device.name }}</td>
+            <td>{{ device.type }}</td>
+            <td>{{ device.location }}</td>
+            <td>{{ device.status }}</td>
+            <td>
+              <button class="btn" (click)="modificarDispositivo(device)">
+                <i class="fas fa-edit"></i> Modificar
+              </button>
+              <button class="btn" (click)="eliminarDispositivo(device)">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </button>
+              <!-- Puedes agregar más acciones aquí -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal para editar dispositivo -->
+  <div class="modal" *ngIf="modal === 'edit'" (click)="cancelarEdicionDispositivo()">
+    <div class="modal-content modal-content-wide" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="cancelarEdicionDispositivo()" title="Cerrar">&times;</button>
+      <h2>Modificar Dispositivo</h2>
+      <form (ngSubmit)="guardarCambiosDispositivo()" #editDeviceForm="ngForm">
+        <div class="form-group">
+          <label for="edit-name">Nombre:</label>
+          <input id="edit-name" name="edit-name" [(ngModel)]="editDeviceData.name" required maxlength="50" />
+        </div>
+        <div class="form-group">
+          <label for="edit-type">Tipo:</label>
+          <input id="edit-type" name="edit-type" [(ngModel)]="editDeviceData.type" required maxlength="50" />
+        </div>
+        <div class="form-group">
+          <label for="edit-location">Ubicación:</label>
+          <input id="edit-location" name="edit-location" [(ngModel)]="editDeviceData.location" required maxlength="255" />
+        </div>
+        <div class="form-group">
+          <label for="edit-status">Estado:</label>
+          <select id="edit-status" name="edit-status" [(ngModel)]="editDeviceData.status" required>
+            <option value="ACTIVE">Activo</option>
+            <option value="INACTIVE">Inactivo</option>
+          </select>
+        </div>
+        <button type="submit" [disabled]="editDeviceForm.invalid" class="btn btn-save">
+          <i class="fas fa-save"></i> Guardar Cambios
+        </button>
+        <button type="button" class="btn btn-cancel" (click)="cancelarEdicionDispositivo()">
+          <i class="fas fa-times-circle"></i> Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

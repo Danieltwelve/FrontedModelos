@@ -21,3 +21,6 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+<input type="text" [(ngModel)]="username" (input)="clearError()" ...>
+<input type="password" [(ngModel)]="password" (input)="clearError()" ...>
